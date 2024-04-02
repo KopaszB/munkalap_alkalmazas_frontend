@@ -39,7 +39,7 @@ const AllSheetCard = (props) => {
                 </tr>
                 <tr>
                     <td>Státusz:</td>
-                    <td className={props.munkalapstatusz == "Aktív" ? "astatusz" : "lstatusz"}>{props.munkalapstatusz}</td>
+                    <td className={props.munkalapstatusz === 'Aktív' ? "astatusz" : "lstatusz"}>{props.munkalapstatusz}</td>
                 </tr>
                 <tr>
                     <td>Üzemanyagszint:</td>

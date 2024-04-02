@@ -93,7 +93,7 @@ nav li:hover {
 
 #allsheet,
 #inactivesheet,
-#activesheet {
+#activesheet{
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -102,6 +102,7 @@ nav li:hover {
 #allsheet h2, 
 #inactivesheet h2,
 #activesheet h2,
+#newsheet h2,
 #viewsheet{
     padding: 10px 0px;
     text-align: center;
@@ -129,11 +130,17 @@ nav li:hover {
     background-color: rgba(110, 110, 110, 0.5);
     backdrop-filter: blur(2px);
 }
-.card>button{
+.card>button,
+#newsheet button{
     border: none;
     padding: 5px 5px;
     background-color: #FFB534;
     width: 100%;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
 }
 .card a{
     text-decoration: none;
@@ -149,6 +156,54 @@ nav li:hover {
     font-weight: bold;
     color: green;
 }
+
+
+/*Újmunkalap*/
+#newsheet {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+#newsheet form{
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: center;
+}
+#newsheet .newsheetpart{
+    
+    font-size: 0.9rem;
+    box-shadow: 0px 0px 10px rgba(35, 29, 29, 0.4);
+    border-radius: 0px;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    
+   
+}
+#newsheet label {
+    text-align: left;
+    display: block;
+    padding-left: 5px;
+
+}
+
+#newsheet h3 {
+    font-size: 1.1rem;
+    color:#333;
+    padding-top: 5px;
+    margin-bottom: 0px;
+}
+
+#newsheet input,
+#newsheet select {
+    width: 100%;
+    padding: 5px 10px;
+    margin-left: 5px 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    display:block;
+}
+
+
 
 @media(max-width:1000px) {
     .menubar .hideonMobile{
