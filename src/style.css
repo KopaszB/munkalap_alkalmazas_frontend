@@ -103,7 +103,7 @@ nav li:hover {
 #inactivesheet h2,
 #activesheet h2,
 #newsheet h2,
-#viewsheet{
+#viewsheet h2{
     padding: 10px 0px;
     text-align: center;
     background-color: rgba(110, 110, 110, 0.5);

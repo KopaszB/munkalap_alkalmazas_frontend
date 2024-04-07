@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
+
 const AllSheet = () => {
   const [apiData, setApiData] = useState()
 
@@ -16,7 +17,7 @@ const AllSheet = () => {
             {
             apiData ?
             apiData.map((data, idx) => <AllSheetCard key={idx} {...data} />) :
-            <div>Loading...</div>
+            <div>Adatok betöltése...</div>
             }
         </div>
     </div>
@@ -25,6 +26,11 @@ const AllSheet = () => {
 export default AllSheet
 
 const AllSheetCard = (props) => {
+
+    const viewButton = () => {
+        console.log("kattintottam")
+    }
+
   return (
     <div className='card'>
         <table>
@@ -55,8 +61,10 @@ const AllSheetCard = (props) => {
                 </tr>
             </tbody>
         </table>
-        <button><a href='/viewsheet'>Megtekintés</a></button>
+        <button onClick={viewButton}>Megtekintés</button>
     </div>
   )
 }
+
+
 

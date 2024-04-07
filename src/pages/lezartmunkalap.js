@@ -16,7 +16,7 @@ const InactiveSheet = () => {
             {
             apiData ?
             apiData.map((data, idx) => <InactiveSheetCard key={idx} {...data} />) :
-            <div>Loading...</div>
+            <div>Adatok betöltése...</div>
             }
         </div>
     </div>

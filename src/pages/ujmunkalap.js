@@ -50,7 +50,8 @@ const NewSheet = () => {
 
         setIspending(true);
 
-        fetch('http://localhost:8000/munkalapAll', {
+        fetch('http://localhost:8000/db.json', {
+            mode:"no-cors",
             method: 'POST',
             headers: {"Content-Type" : "application/json"},
             body: JSON.stringify(munkalap)

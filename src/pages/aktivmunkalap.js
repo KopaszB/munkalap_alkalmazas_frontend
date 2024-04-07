@@ -16,7 +16,7 @@ const ActiveSheet = () => {
             {
             apiData ?
             apiData.map((data, idx) => <ActiveSheetCard key={idx} {...data} />) :
-            <div>Loading...</div>
+            <div>Adatok betöltése...</div>
             }
         </div>
     </div>
