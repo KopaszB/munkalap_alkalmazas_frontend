@@ -4,10 +4,19 @@ import React, {useEffect, useState} from 'react'
 const ViewSheet = () => {
   const [apiData, setApiData] = useState()
 
+
   useEffect(()=>{
     fetch("http://localhost:8000/munkalapAll.json")
     .then(res => res.json())
-    .then(data => setApiData(data))
+    .then(data => {
+        
+        data.forEach(element => {
+            if(element.id == localStorage.getItem('viewsheetId')){
+                setApiData(element)
+            }
+        });
+        
+    })
   }, [])
 
   return (
@@ -16,7 +25,7 @@ const ViewSheet = () => {
         <div className="viewsheetcard">
             {
             apiData ?
-            apiData.map((data, idx) => <ViewSheetCard key={idx} {...data} />) :
+            <ViewSheetCard {...apiData} /> :
             <div>Adatok betöltése...</div>
             }
         </div>
