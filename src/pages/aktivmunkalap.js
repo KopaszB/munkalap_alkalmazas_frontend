@@ -27,6 +27,12 @@ const ActiveSheet = () => {
 export default ActiveSheet
 
 const ActiveSheetCard = (props) => {
+
+    const moveToViewsheet = (e) => {
+        localStorage.setItem('viewsheetId',props.id)
+        console.log(e.target.href="/viewsheet")
+    }
+
   return (
     <div className='card'>
         <table>
