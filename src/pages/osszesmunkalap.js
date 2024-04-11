@@ -5,7 +5,7 @@ const AllSheet = () => {
   const [apiData, setApiData] = useState()
 
   useEffect(()=>{
-    fetch('http://localhost:8000/allsheet.json')
+    fetch('http://localhost:8000/munkalap.json')
     .then(res => res.json())
     .then(data => setApiData(data))
   }, [])

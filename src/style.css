@@ -16,6 +16,7 @@ nav {
     background-color: #333;
     color: azure;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    
 }
 
 nav ul{
@@ -130,7 +131,7 @@ nav li:hover {
     background-color: rgba(110, 110, 110, 0.5);
     backdrop-filter: blur(2px);
 }
-.card>button,
+.button,
 #newsheet button{
     border: none;
     padding: 5px 5px;

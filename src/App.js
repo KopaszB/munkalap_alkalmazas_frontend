@@ -5,8 +5,10 @@ import ActiveSheet from './pages/aktivmunkalap'
 import NewSheet from './pages/ujmunkalap'
 import ViewSheet from './pages/viewsheet'
 import Welcome from './pages/welcome'
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom' 
 
 const App = () => {
+  /*
   let component
   switch (window.location.pathname) {
     case "/":
@@ -30,12 +32,44 @@ const App = () => {
     default:
       break;
   }
-
+  */
 
   return (
     <>
-      <Navbar />
-      <div className="component">{component}</div>
+      <Router>
+        <Navbar />
+        <div className="component">
+          <Switch>
+
+            <Route exact path="/">
+              <Welcome />
+            </Route>
+
+            <Route path="/viewsheet/:id">
+              <ViewSheet />
+            </Route>
+
+            <Route path="/ujmunkalap">
+              <NewSheet />
+            </Route>
+
+            <Route path="/aktivmunkalap">
+              <ActiveSheet />
+            </Route>
+
+            <Route path="/lezartmunkalap">
+              <InactiveSheet />
+            </Route>
+
+            <Route path="/osszesmunkalap">
+              <AllSheet />
+            </Route>
+
+          </Switch>
+
+        </div>
+      </Router>
+      
     </>
   )
 }

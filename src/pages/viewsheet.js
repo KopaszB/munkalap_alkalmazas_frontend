@@ -1,29 +1,54 @@
 import React, {useEffect, useState} from 'react'
+import { useParams } from 'react-router-dom'
 
 
 const ViewSheet = () => {
-  const [apiData, setApiData] = useState()
-
-  useEffect(()=>{
-    fetch("http://localhost:8000/munkalapAll.json")
-    .then(res => res.json())
-    .then(data => setApiData(data))
-  }, [])
-
-  return (
-    <div id="viewsheet">
-        <h2>Megtekintés</h2>
-        <div className="viewsheetcard">
-            {
-            apiData ?
-            apiData.map((data, idx) => <ViewSheetCard key={idx} {...data} />) :
-            <div>Adatok betöltése...</div>
-            }
+    const [apiData, setApiData] = useState()
+    const param = useParams()
+    /*
+      useEffect(()=>{
+        fetch("http://localhost:8000/munkalapAll.json")
+        .then(res => res.json())
+        .then(data => setApiData(data))
+      }, [])
+    
+      return (
+        <div id="viewsheet">
+            <h2>Megtekintés</h2>
+            <div className="viewsheetcard">
+               <h1>{id}. elem</h1>
+            </div>
         </div>
-    </div>
-  )
-}
+      )
+    }
+    */
+    useEffect(() => {
+        fetch("http://localhost:8000/munkalapAll.json")
+            .then(res => res.json())
+            .then(data => {
 
+                data.forEach(element => {
+                    if (element.id == param.id) {
+                        setApiData(element)
+                    }
+                });
+
+            })
+    })
+
+    return (
+        <div id="viewsheet">
+            <h2>Megtekintés</h2>
+            <div className="viewsheetcard">
+                {
+                    apiData ?
+                        <ViewSheetCard {...apiData} /> :
+                        <div>Adatok betöltése...</div>
+                }
+            </div>
+        </div>
+    )
+}
 export default ViewSheet
 
 const ViewSheetCard = (props) => {

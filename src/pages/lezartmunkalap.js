@@ -4,7 +4,7 @@ const InactiveSheet = () => {
   const [apiData, setApiData] = useState()
 
   useEffect(()=>{
-    fetch('http://localhost:8000/inactivesheet.json')
+    fetch('http://localhost:8000/munkalapInAktiv.json')
     .then(res => res.json())
     .then(data => setApiData(data))
   }, [])

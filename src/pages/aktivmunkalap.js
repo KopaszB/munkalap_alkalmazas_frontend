@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const ActiveSheet = () => {
   const [apiData, setApiData] = useState()
 
   useEffect(()=>{
-    fetch('http://localhost:8000/activesheet.json')
+    fetch('http://localhost:8000/munkalapAktiv.json')
     .then(res => res.json())
     .then(data => setApiData(data))
   }, [])
@@ -15,7 +16,8 @@ const ActiveSheet = () => {
         <div className="cards">
             {
             apiData ?
-            apiData.map((data, idx) => <ActiveSheetCard key={idx} {...data} />) :
+            apiData.map((data, idx) => (
+            <ActiveSheetCard key={idx} {...data} />)) :
             <div>Adatok betöltése...</div>
             }
         </div>
@@ -55,7 +57,8 @@ const ActiveSheetCard = (props) => {
                 </tr>
             </tbody>
         </table>
-        <button><a href='/viewsheet'>Megtekintés</a></button>
+        <h1>{`/viewsheet/${props.id}`}ezaz</h1>
+        <a className='button' href={`/viewsheet/${props.id}`}>Megtekintés</a>
     </div>
   )
 }
