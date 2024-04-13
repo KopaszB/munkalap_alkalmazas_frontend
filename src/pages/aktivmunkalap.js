@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 
 const ActiveSheet = () => {
   const [apiData, setApiData] = useState()
@@ -16,8 +15,7 @@ const ActiveSheet = () => {
         <div className="cards">
             {
             apiData ?
-            apiData.map((data, idx) => (
-            <ActiveSheetCard key={idx} {...data} />)) :
+            apiData.map((data, idx) => (<ActiveSheetCard key={idx} {...data} />)) :
             <div>Adatok betöltése...</div>
             }
         </div>
@@ -28,10 +26,10 @@ export default ActiveSheet
 
 const ActiveSheetCard = (props) => {
 
-    const moveToViewsheet = (e) => {
+    /*const moveToViewsheet = (e) => {
         localStorage.setItem('viewsheetId',props.id)
         console.log(e.target.href="/viewsheet")
-    }
+    }*/
 
   return (
     <div className='card'>
@@ -63,8 +61,10 @@ const ActiveSheetCard = (props) => {
                 </tr>
             </tbody>
         </table>
+        <div className='button'>
+            <a href={`/viewsheet/${props.id}`}>Megtekintés</a>
+        </div>
         
-        <a className='button' href={`/viewsheet/${props.id}`}>Megtekintés</a>
     </div>
   )
 }

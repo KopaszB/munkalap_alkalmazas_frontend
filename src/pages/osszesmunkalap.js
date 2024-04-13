@@ -61,7 +61,9 @@ const AllSheetCard = (props) => {
                 </tr>
             </tbody>
         </table>
-        <button onClick={viewButton}>Megtekintés</button>
+        <div className='button'>
+            <a href={`/viewsheet/${props.id}`}>Megtekintés</a>
+        </div>
     </div>
   )
 }

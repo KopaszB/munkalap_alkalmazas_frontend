@@ -125,13 +125,31 @@ nav li:hover {
     overflow: hidden;
     background-color: rgba(255, 255, 255, 0.393);
     backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .card table th{
     width:100%;
     background-color: rgba(110, 110, 110, 0.5);
     backdrop-filter: blur(2px);
+    
 }
-.button,
+
+.button {
+    padding: 5px 0px;
+    background-color: #FFB534;
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+}
+.button a{
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+}
+
 #newsheet button{
     border: none;
     padding: 5px 5px;
@@ -143,12 +161,9 @@ nav li:hover {
     font-weight: bold;
     color: #333;
 }
-.card a{
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #333;
-}
+
+
+
 .card .astatusz{
     font-weight: bold;
     color: red;
@@ -160,7 +175,7 @@ nav li:hover {
 
 
 /*Újmunkalap*/
-#newsheet {
+#newsheet{
     width: 100%;
     padding: 0;
     margin: 0;
@@ -171,20 +186,16 @@ nav li:hover {
     text-align: center;
 }
 #newsheet .newsheetpart{
-    
     font-size: 0.9rem;
     box-shadow: 0px 0px 10px rgba(35, 29, 29, 0.4);
     border-radius: 0px;
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px);
-    
-   
 }
-#newsheet label {
+#newsheet label, .label {
     text-align: left;
     display: block;
     padding-left: 5px;
-
 }
 
 #newsheet h3 {
@@ -203,7 +214,32 @@ nav li:hover {
     box-sizing: border-box;
     display:block;
 }
-
+/*** Megtekintés ***/
+#viewsheet{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.viewsheetcard {
+    max-width: 520px;
+    margin: 0 auto;
+    font-size: 0.9rem;
+    box-shadow: 0px 0px 10px rgba(35, 29, 29, 0.4);
+    border-radius: 0px;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    
+}
+.viewdata{
+    margin: 0 auto;
+    text-align: center;
+}
+.viewdata h3{
+    font-size: 1.1rem;
+    color:#333;
+    padding-top: 5px;
+    margin-bottom: 0px;
+}
 
 
 @media(max-width:1000px) {

@@ -1,5 +1,6 @@
 [
     {
+	"id":1,
         "munkalapszam": "2024.02.23/1",
         "megrendelo_neve": "Kiss Csaba Lajos",
         "munkalapstatusz": "Aktív",
@@ -8,6 +9,7 @@
         "gepjarmu": "Suzuki"
     },
     {
+	"id":2,
         "munkalapszam": "20240322/1",
         "megrendelo_neve": "Kasza Diána",
         "munkalapstatusz": "Lezárt",

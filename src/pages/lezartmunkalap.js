@@ -55,7 +55,9 @@ const InactiveSheetCard = (props) => {
                 </tr>
             </tbody>
         </table>
-      <button><a href='/viewsheet'>Megtekintés</a></button>
+        <div className='button'>
+            <a href={`/viewsheet/${props.id}`}>Megtekintés</a>
+        </div>
     </div>
   )
 }

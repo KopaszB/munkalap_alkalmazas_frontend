@@ -140,7 +140,7 @@ const NewSheet = () => {
                     <input type="text"  value={hibaleiras} onChange={(e)=>setHibaleiras(e.target.value)}/>
 
                     <label>Várható határidő: </label>
-                    <input type="text"  value={varhatohatarido} onChange={(e)=>setVarhatohatarido(e.target.value)}/>
+                    <input type="date"  value={varhatohatarido} onChange={(e)=>setVarhatohatarido(e.target.value)}/>
 
                     <label>Elvégzett munka megnevezése: </label>
                     <input type="text"  value={elvegzettmunka} onChange={(e)=>setElvegzettmunka(e.target.value)}/>
