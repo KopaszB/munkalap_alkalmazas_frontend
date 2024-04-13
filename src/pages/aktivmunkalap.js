@@ -63,7 +63,7 @@ const ActiveSheetCard = (props) => {
                 </tr>
             </tbody>
         </table>
-        <h1>{`/viewsheet/${props.id}`}ezaz</h1>
+        
         <a className='button' href={`/viewsheet/${props.id}`}>Megtekintés</a>
     </div>
   )
