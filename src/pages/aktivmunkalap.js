@@ -4,7 +4,7 @@ const ActiveSheet = () => {
   const [apiData, setApiData] = useState()
 
   useEffect(()=>{
-    fetch('http://localhost:8000/munkalapAktiv.json')
+    fetch('http://localhost:8000/api/munkalapAktiv/')
     .then(res => res.json())
     .then(data => setApiData(data))
   }, [])
@@ -41,23 +41,23 @@ const ActiveSheetCard = (props) => {
                 </tr>
                 <tr>
                     <td>Név:</td>
-                    <td>{props.megrendelo_neve}</td>
+                    <td>{props.megrendelo_id.nev}</td>
                 </tr>
                 <tr>
                     <td>Státusz:</td>
-                    <td className='astatusz'>{props.munkalapstatusz}</td>
+                    <td className='astatusz'>{props.munkalapstatus}</td>
                 </tr>
                 <tr>
                     <td>Üzemanyagszint:</td>
-                    <td>{props.uzemanyagszint}</td>
+                    <td>{props.uzemenyagszint}</td>
                 </tr>
                 <tr>
                     <td>Hiba:</td>
-                    <td>{props.hiba}</td>
+                    <td>{props.hibatipus_id.hiba}</td>
                 </tr>
                 <tr>
                     <td>Márka:</td>
-                    <td>{props.gepjarmu}</td>
+                    <td>{props.gepjarmu_id.gyartmany}</td>
                 </tr>
             </tbody>
         </table>

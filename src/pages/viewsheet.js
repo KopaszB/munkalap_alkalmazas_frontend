@@ -7,7 +7,7 @@ const ViewSheet = () => {
     const param = useParams()
 
     useEffect(() => {
-        fetch("http://localhost:8000/munkalapAll.json")
+        fetch("http://localhost:8000/api/munkalapOsszes/")
             .then(res => res.json())
             .then(data => {
 
@@ -41,11 +41,11 @@ const ViewSheetCard = (props) => {
     const [email, setEmail] = useState(`${props.megrendelo_id.email}`);
     const [telefon, setTelefon] = useState(`${props.megrendelo_id.telefon}`);
     const [hiba, setHiba] = useState(`${props.hibatipus_id.hiba}`);
-    const [rendszam, setRendszam] = useState(`${props.gepjarmu.rendszam}`);
-    const [gyartmany, setGyartmany] = useState(`${props.gepjarmu.gyartmany}`);
-    const [tipus, setTipus] = useState(`${props.gepjarmu.tipus}`);
-    const [gyartasi_ev, setGyartasi_ev] = useState(`${props.gepjarmu.gyartasi_ev}`);
-    const [alvazszam, setAlvazszam] = useState(`${props.gepjarmu.alvazszam}`);
+    const [rendszam, setRendszam] = useState(`${props.gepjarmu_id.rendszam}`);
+    const [gyartmany, setGyartmany] = useState(`${props.gepjarmu_id.gyartmany}`);
+    const [tipus, setTipus] = useState(`${props.gepjarmu_id.tipus}`);
+    const [gyartasi_ev, setGyartasi_ev] = useState(`${props.gepjarmu_id.gyartasi_ev}`);
+    const [alvazszam, setAlvazszam] = useState(`${props.gepjarmu_id.alvazszam}`);
     const [datum, setDatum] = useState(`${props.datum}`);
     const [munkalapstatusz, setMunkalapstatusz] = useState(`${props.munkalapstatus}`);
     const [munkalapszam, setMunkalapszam] = useState(`${props.munkalapszam}`);

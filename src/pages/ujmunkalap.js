@@ -49,8 +49,8 @@ const NewSheet = () => {
         }
 
         setIspending(true);
-
-        fetch('http://localhost:8000/db.json', {
+        console.log(JSON.stringify(munkalap));
+        fetch('http://localhost:8000/api/munkalapUj/', {
             mode:"no-cors",
             method: 'POST',
             headers: {"Content-Type" : "application/json"},
@@ -148,8 +148,8 @@ const NewSheet = () => {
                     <label>Felhasznált alkatrészek: </label>
                     <input type="text"  value={felhasznaltanyag} onChange={(e)=>setFelhasznaltanyag(e.target.value)}/>
                 </div>
-                {!ispending && <button>Mentés</button>}
-                {ispending && <button disabled>Mentés folyamatban...</button>}
+                {!ispending && <input type="submit" value="Mentés"/>}
+                {ispending && <input type="submit" disabled value="Mentés folyamatban..."/>}
                 
             </form>
         </div>
