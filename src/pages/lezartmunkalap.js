@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 
 const InactiveSheet = () => {
-  const [apiData, setApiData] = useState()
+    const [apiData, setApiData] = useState()
 
-  useEffect(()=>{
-    fetch('http://localhost:8000/munkalapInAktiv.json')
-    .then(res => res.json())
-    .then(data => setApiData(data))
-  }, [])
+    useEffect(()=>{
+      fetch('http://localhost:8000/api/munkalapInAktiv/')
+      .then(res => res.json())
+      .then(data => setApiData(data))
+    }, [])
+  
+   
 
   return (
     <div id="inactivesheet">
@@ -22,7 +24,7 @@ const InactiveSheet = () => {
     </div>
   )
 }
-export default InactiveSheet
+
 
 const InactiveSheetCard = (props) => {
   return (
@@ -30,28 +32,28 @@ const InactiveSheetCard = (props) => {
         <table>
             <tbody>
                 <tr>
-                    <th>Munkalapszám:</th>
+                <th>Munkalapszám:</th>
                     <th>{props.munkalapszam}</th>
                 </tr>
                 <tr>
                     <td>Név:</td>
-                    <td>{props.megrendelo_neve}</td>
+                    <td>{props.megrendelo_id.nev}</td>
                 </tr>
                 <tr>
                     <td>Státusz:</td>
-                    <td className='lstatusz'>{props.munkalapstatusz}</td>
+                    <td className='astatusz'>{props.munkalapstatus}</td>
                 </tr>
                 <tr>
                     <td>Üzemanyagszint:</td>
-                    <td>{props.uzemanyagszint}</td>
+                    <td>{props.uzemenyagszint}</td>
                 </tr>
                 <tr>
                     <td>Hiba:</td>
-                    <td>{props.hiba}</td>
+                    <td>{props.hibatipus_id.hiba}</td>
                 </tr>
                 <tr>
                     <td>Márka:</td>
-                    <td>{props.gepjarmu}</td>
+                    <td>{props.megrendelo_id.gyartmany}</td>
                 </tr>
             </tbody>
         </table>
@@ -62,3 +64,4 @@ const InactiveSheetCard = (props) => {
   )
 }
 
+export default InactiveSheet

@@ -1,160 +1,179 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Select from 'react-select';
 
+const enumToReadable = {
+  enum_value_1: 'Aktív',
+  enum_value_2: 'Lezárt'
+  // Folytasd a többi értékkel...
+}
 
-const NewSheet = () => {
-    const [nev, setNev] = useState('');
-    const [cim, setCim] = useState('');
-    const [email, setEmail] = useState('');
-    const [telefon, setTelefon] = useState('');
-    const [hiba, setHiba] = useState('Fékrendszer');
-    const [rendszam, setRendszam] = useState('');
-    const [gyartmany, setGyartmany] = useState('');
-    const [tipus, setTipus] = useState('');
-    const [gyartasi_ev, setGyartasi_ev] = useState('');
-    const [alvazszam, setAlvazszam] = useState('');
-    const [datum, setDatum] = useState('');
-    const [munkalapstatusz, setMunkalapstatusz] = useState('');
-    const [munkalapszam, setMunkalapszam] = useState('');
-    const [kmoraallas, setKmoraallas] = useState('');
-    const [uzemenyagszint, setUzemenyagszint] = useState('');
-    const [hibaleiras, setHibaleiras] = useState('');
-    const [varhatohatarido, setVarhatohatarido] = useState('');
-    const [elvegzettmunka, setElvegzettmunka] = useState('');
-    const [felhasznaltanyag, setFelhasznaltanyag] = useState('');
-    const [ispending, setIspending] = useState(false);
-    
+const enumToReadable2 = {
+  enum_value_1: 'Negyed',
+  enum_value_2: 'Fél',
+  enum_value_3: 'Háromnegyed',
+  enum_value_4: 'Tele'
+  // Folytasd a többi értékkel...
+}
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const munkalap = {
-            nev,
-            cim,
-            email,
-            telefon,
-            hiba,
-            rendszam,
-            gyartmany,
-            tipus,
-            gyartasi_ev,
-            alvazszam,
-            datum,
-            munkalapstatusz,
-            munkalapszam,
-            kmoraallas,
-            uzemenyagszint,
-            hibaleiras,
-            varhatohatarido,
-            elvegzettmunka,
-            felhasznaltanyag
-        }
+function generateMunkalapszam() {
+  const now = new Date();
+  const year = now.getFullYear().toString().slice(-2);
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hour = String(now.getHours()).padStart(2, '0');
+  const minute = String(now.getMinutes()).padStart(2, '0');
+  return `AT-${year}\\${month}-${day}-${hour}${minute}`;
+}
 
-        setIspending(true);
-        console.log(JSON.stringify(munkalap));
-        fetch('http://localhost:8000/api/munkalapUj/', {
-            mode:"no-cors",
-            method: 'POST',
-            headers: {"Content-Type" : "application/json"},
-            body: JSON.stringify(munkalap)
-        }).then(() => {
-            console.info('Sikeres mentés!');
-            setIspending(false);
-        })
+function MunkalapForm({ munkalapId }) {
+  const [munkalap, setMunkalap] = useState({
+    megrendelo_id: '',
+    munkalapstatus: 'enum_value_1',
+    munkalapszam: generateMunkalapszam(),
+    kmoraallas: '',
+    uzemenyagszint: 'enum_value_1',
+    hibatipus_id: '',
+    hibaleiras: '',
+    varhatohatarido: '',
+    elvegzettmunka: '',
+    felhasznaltanyag: ''
+  });
+
+  const [megrendelok, setMegrendelok] = useState([]);
+  const [hibatipusok, setHibatipusok] = useState([]);
+
+  useEffect(() => {
+    fetchMegrendelok();
+    fetchHibatipusok();
+    if (munkalapId) {
+      fetchMunkalap();
+    }
+  }, [munkalapId]);
+
+  const fetchMegrendelok = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/megrendelok/');
+      const data = await response.json();
+      setMegrendelok(data);
+    } catch (error) {
+      console.error('Error fetching megrendelok:', error);
+    }
+  };
+
+  const fetchHibatipusok = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/hibatipusok/');
+      const data = await response.json();
+      setHibatipusok(data);
+    } catch (error) {
+      console.error('Error fetching hibatipusok:', error);
+    }
+  };
+
+  const fetchMunkalap = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/api/munkalapok/${munkalapId}/`);
+      const data = await response.json();
+      // Csak az azonosítókat mentjük el, az enum értékeket a frontend oldalon alakítjuk át érthető formátumra
+      const { megrendelo_id, datum, munkalapstatusz, munkalapszam, kmoraallas, uzemenyagszint, hibatipus_id, hibaleiras, varhatohatarido, elvegzettmunka, felhasznaltanyag } = data;
+      setMunkalap({
+        megrendelo_id: megrendelo_id.id,
+        datum,
+        munkalapstatus: enumToReadable[munkalapstatusz],
+        munkalapszam,
+        kmoraallas,
+        uzemenyagszint: enumToReadable2[uzemenyagszint],
+        hibatipus_id: hibatipus_id.id,
+        hibaleiras,
+        varhatohatarido,
+        elvegzettmunka,
+        felhasznaltanyag
+      });
+    } catch (error) {
+      console.error('Error fetching munkalap:', error);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setMunkalap({ ...munkalap, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (munkalapId) {
+        await fetch(`http://localhost:8000/api/munkalapok/${munkalapId}/`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(munkalap),
+        });
+      } else {
+        await fetch('http://localhost:8000/api/munkalapok/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(munkalap),
+
+        });
+      }
+      console.log('POST request data:', munkalap); // Log data here
+      // Redirect or do something after successful form submission
+    } catch (error) {
+      console.error('Error submitting munkalap form:', error);
     }
 
-    return (
-        <div id="newsheet">
-            <h2>Új munkalap felvétele</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="newsheetpart">
-                    <h3>Megrendelő</h3>
-                    <label>Név: </label>
-                    <input type="text" required value={nev} onChange={(e)=>setNev(e.target.value)}/>
-
-                    <label>Cím: </label>
-                    <input type="text"  value={cim} onChange={(e)=>setCim(e.target.value)}/>
-
-                    <label>E-mail: </label>
-                    <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-
-                    <label>Telefon: </label>
-                    <input type="text"  value={telefon} onChange={(e)=>setTelefon(e.target.value)}/>
-                </div>
-                <div className="newsheetpart">
-                    <h3>Hibatípus</h3>
-                    <label>Hiba: </label>
-                    <select value={hiba} onChange={(e)=>setHiba(e.target.value)}>
-                        <option value="Fékrendszer">Fékrendszer</option>
-                        <option value="Futómű">Futómű</option>
-                        <option value="Olajcsere">Olajcsere</option>
-                        <option value="Akkumulátor">Akkumulátor</option>
-                        <option value="Vezérlés">Vezérlés</option>
-                        <option value="Gumiabroncs">Gumiabroncs</option>
-                        <option value="Kipufogó">Kipufogó</option>
-                        <option value="Diagnosztika">Diagnosztika</option>
-                        <option value="Motor">Motor</option>
-                        <option value="Klíma">Klíma</option>
-                    </select>
-                </div>
-                <div className="newsheetpart">
-                    <h3>Gépjármű</h3>
-                    <label>Rendszám: </label>
-                    <input type="text"  value={rendszam} onChange={(e)=>setRendszam(e.target.value)}/>
-
-                    <label>Gyártmány: </label>
-                    <input type="text"  value={gyartmany} onChange={(e)=>setGyartmany(e.target.value)}/>
-
-                    <label>Típus: </label>
-                    <input type="text" value={tipus} onChange={(e)=>setTipus(e.target.value)}/>
-
-                    <label>Gyártási év: </label>
-                    <input type="number"  value={gyartasi_ev} onChange={(e)=>setGyartasi_ev(e.target.value)}/>
-
-                    <label>Alvázszám: </label>
-                    <input type="text"  value={alvazszam} onChange={(e)=>setAlvazszam(e.target.value)}/>
-                </div>
-                <div className="newsheetpart">
-                    <h3>Munkalap</h3>
-                    <label>Dátum: </label>
-                    <input type="date"  value={datum} onChange={(e)=>setDatum(e.target.value)}/>
-
-                    <label>Munkalapstátusz: </label>
-                    <select required value={munkalapstatusz} onChange={(e)=>setMunkalapstatusz(e.target.value)}>
-                        <option value="Aktív">Aktív</option>
-                        <option value="Lezárt">Lezárt</option>
-                    </select>
-
-                    <label>Munkalapszám: </label>
-                    <input type="text" value={munkalapszam} onChange={(e)=>setMunkalapszam(e.target.value)}/>
-
-                    <label>Km-óra: </label>
-                    <input type="text"  value={kmoraallas} onChange={(e)=>setKmoraallas(e.target.value)}/>
-
-                    <label>Üzemanyagszint: </label>
-                    <select value={uzemenyagszint} onChange={(e)=>setUzemenyagszint(e.target.value)}>
-                        <option value="Negyed">Negyed tank</option>
-                        <option value="Fél">Fél tank</option>
-                        <option value="Tele">Tele tank</option>
-                    </select>
-
-                    <label>Hiba leírása: </label>
-                    <input type="text"  value={hibaleiras} onChange={(e)=>setHibaleiras(e.target.value)}/>
-
-                    <label>Várható határidő: </label>
-                    <input type="date"  value={varhatohatarido} onChange={(e)=>setVarhatohatarido(e.target.value)}/>
-
-                    <label>Elvégzett munka megnevezése: </label>
-                    <input type="text"  value={elvegzettmunka} onChange={(e)=>setElvegzettmunka(e.target.value)}/>
-
-                    <label>Felhasznált alkatrészek: </label>
-                    <input type="text"  value={felhasznaltanyag} onChange={(e)=>setFelhasznaltanyag(e.target.value)}/>
-                </div>
-                {!ispending && <input type="submit" value="Mentés"/>}
-                {ispending && <input type="submit" disabled value="Mentés folyamatban..."/>}
-                
-            </form>
-        </div>
-    )
+  };
+  return (
+    <div id="newsheet">
+      <h2>Új munkalap felvétele</h2>
+      <form onSubmit={handleSubmit}>
+        <label>Munkalap száma:</label>
+        <input type="text" name="munkalapszam" value={munkalap.munkalapszam} onChange={handleChange} />
+        <label>Munkalap státusz:</label>
+        <select name="munkalapstatus" value={munkalap.munkalapstatusz} onChange={handleChange} >
+          <option value="enum_value_1">Aktív</option>
+          <option value="enum_value_2">Lezárt</option>
+        </select>
+        <label>Megrendelő:</label>
+        <select name="megrendelo_id" value={munkalap.megrendelo_id} onChange={handleChange}>
+          <option value="">Válasszon megrendelőt...</option>
+          {megrendelok.map(megrendelo => (
+            <option key={megrendelo.id} value={megrendelo.id}>{megrendelo.rendszam}{'____'}{megrendelo.nev} {'____'} {megrendelo.cim}  </option>
+          ))}
+        </select>
+        <label>Km-óra állás:</label>
+        <input type="number" name="kmoraallas" value={munkalap.kmoraallas} onChange={handleChange} />
+        <label>Üzemanyagszint:</label>
+        <select name="uzemenyagszint" value={munkalap.uzemenyagszint} onChange={handleChange}>
+          <option value="enum_value_1">Negyed</option>
+          <option value="enum_value_2">Fél</option>
+          <option value="enum_value_3">Háromnegyed</option>
+          <option value="enum_value_4">Tele</option>
+        </select>
+        <label>Hibatípus:</label>
+        <select name="hibatipus_id" value={munkalap.hibatipus_id} onChange={handleChange}>
+          <option value="">Válasszon hibatípust...</option>
+          {hibatipusok.map(hibatipus => (
+            <option key={hibatipus.id} value={hibatipus.id}>{hibatipus.hiba}</option>
+          ))}
+        </select>
+        <label>Hiba leírása:</label>
+        <input type="text" name="hibaleiras" value={munkalap.hibaleiras} onChange={handleChange} />
+        <label>Várható határidő:</label>
+        <input type="date" name="varhatohatarido" value={munkalap.varhatohatarido} onChange={handleChange} />
+        <label>Elvégzett munka:</label>
+        <input type="text" name="elvegzettmunka" value={munkalap.elvegzettmunka} onChange={handleChange} />
+        <label>Felhasznált anyagok:</label>
+        <input type="text" name="felhasznaltanyag" value={munkalap.felhasznaltanyag} onChange={handleChange} />
+        <button type="submit">Mentés</button>
+      </form>
+    </div>
+  )
 }
 
 
-export default NewSheet
+export default MunkalapForm;

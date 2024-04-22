@@ -1,62 +1,28 @@
-import React, {useEffect, useState} from 'react'
-import { useParams } from 'react-router-dom'
-import { useHistory } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
 
-const ViewSheet = () => {
-    const [apiData, setApiData] = useState()
-    const param = useParams()
 
-    useEffect(() => {
-        fetch("http://localhost:8000/api/munkalapOsszes/")
-            .then(res => res.json())
-            .then(data => {
-
-                data.forEach(element => {
-                    if (element.id == param.id) {
-                        setApiData(element)
-                    }
-                });
-
-            })
-    })
-
-    return (
-        <div id="viewsheet">
-            <h2>Megtekintés</h2>
-            <div className="viewsheetcard">
-                {
-                    apiData ?
-                        <ViewSheetCard {...apiData} /> :
-                        <div>Adatok betöltése...</div>
-                }
-            </div>
-        </div>
-    )
-}
-export default ViewSheet
-
-const ViewSheetCard = (props) => {
-    const [nev, setNev] = useState(`${props.megrendelo_id.nev}`);
-    const [cim, setCim] = useState(`${props.megrendelo_id.cim}`);
-    const [email, setEmail] = useState(`${props.megrendelo_id.email}`);
-    const [telefon, setTelefon] = useState(`${props.megrendelo_id.telefon}`);
-    const [hiba, setHiba] = useState(`${props.hibatipus_id.hiba}`);
-    const [rendszam, setRendszam] = useState(`${props.megrendelo_id.rendszam}`);
-    const [gyartmany, setGyartmany] = useState(`${props.megrendelo_id.gyartmany}`);
-    const [tipus, setTipus] = useState(`${props.megrendelo_id.tipus}`);
-    const [gyartasi_ev, setGyartasi_ev] = useState(`${props.megrendelo_id.gyartasi_ev}`);
-    const [alvazszam, setAlvazszam] = useState(`${props.megrendelo_id.alvazszam}`);
-    const [datum, setDatum] = useState(`${props.datum}`);
-    const [munkalapstatusz, setMunkalapstatusz] = useState(`${props.munkalapstatus}`);
-    const [munkalapszam, setMunkalapszam] = useState(`${props.munkalapszam}`);
-    const [kmoraallas, setKmoraallas] = useState(`${props.kmoraallas}`);
-    const [uzemenyagszint, setUzemenyagszint] = useState(`${props.uzemenyagszint}`);
-    const [hibaleiras, setHibaleiras] = useState(`${props.hibaleiras}`);
-    const [varhatohatarido, setVarhatohatarido] = useState(`${props.varhatohatarido}`);
-    const [elvegzettmunka, setElvegzettmunka] = useState(`${props.elvegzettmunka}`);
-    const [felhasznaltanyag, setFelhasznaltanyag] = useState(`${props.felhasznaltanyag}`);
+const NewSheet = () => {
+    const [nev, setNev] = useState('');
+    const [cim, setCim] = useState('');
+    const [email, setEmail] = useState('');
+    const [telefon, setTelefon] = useState('');
+    const [hiba, setHiba] = useState('Fékrendszer');
+    const [rendszam, setRendszam] = useState('');
+    const [gyartmany, setGyartmany] = useState('');
+    const [tipus, setTipus] = useState('');
+    const [gyartasi_ev, setGyartasi_ev] = useState('');
+    const [alvazszam, setAlvazszam] = useState('');
+    const [datum, setDatum] = useState('');
+    const [munkalapstatusz, setMunkalapstatusz] = useState('');
+    const [munkalapszam, setMunkalapszam] = useState('');
+    const [kmoraallas, setKmoraallas] = useState('');
+    const [uzemenyagszint, setUzemenyagszint] = useState('');
+    const [hibaleiras, setHibaleiras] = useState('');
+    const [varhatohatarido, setVarhatohatarido] = useState('');
+    const [elvegzettmunka, setElvegzettmunka] = useState('');
+    const [felhasznaltanyag, setFelhasznaltanyag] = useState('');
     const [ispending, setIspending] = useState(false);
-    const history = useHistory()
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -83,8 +49,8 @@ const ViewSheetCard = (props) => {
         }
 
         setIspending(true);
-
-        fetch('http://localhost:8000/db.json', {
+        console.log(JSON.stringify(munkalap));
+        fetch('http://localhost:8000/api/munkalapUj/', {
             mode:"no-cors",
             method: 'POST',
             headers: {"Content-Type" : "application/json"},
@@ -94,8 +60,11 @@ const ViewSheetCard = (props) => {
             setIspending(false);
         })
     }
+
+    
     return (
         <div id="newsheet">
+            <h2>Új munkalap felvétele</h2>
             <form onSubmit={handleSubmit}>
                 <div className="newsheetpart">
                     <h3>Megrendelő</h3>
@@ -180,11 +149,13 @@ const ViewSheetCard = (props) => {
                     <label>Felhasznált alkatrészek: </label>
                     <input type="text"  value={felhasznaltanyag} onChange={(e)=>setFelhasznaltanyag(e.target.value)}/>
                 </div>
-                {!ispending && <button>Módosítás mentése</button>}
-                {ispending && <button disabled>Mentés folyamatban...</button>}
-                &nbsp;
-                <button onClick={() => history.goBack()}>Bezárás</button>
+                {!ispending && <input type="submit" value="Mentés"/>}
+                {ispending && <input type="submit" disabled value="Mentés folyamatban..."/>}
+                
             </form>
         </div>
     )
 }
+
+
+export default NewSheet

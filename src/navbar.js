@@ -3,6 +3,7 @@ const Navbar = () => {
     <nav>
         <ul className = "menubar">
             <CustomLink href="/">AutoTech autószervíz</CustomLink>
+            <CustomLink  href="/megrendelok">Megrendelők</CustomLink>
             <CustomLink  href="/ujmunkalap">Új munkalap</CustomLink>
             <CustomLink  href="/aktivmunkalap">Aktív munkalapok</CustomLink>
             <CustomLink  href="/lezartmunkalap">Lezárt munkalapok</CustomLink>
@@ -11,13 +12,13 @@ const Navbar = () => {
         </ul>
         <ul className = "sidebar">
             <li onClick={hideSidebar}><a href="/"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path fill="#f0ffff" d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+            <CustomLink  href="/megrendelok">Megrendelők</CustomLink>
             <CustomLink href="/ujmunkalap">Új munkalap</CustomLink>
             <CustomLink href="/aktivmunkalap">Aktív munkalapok</CustomLink>
             <CustomLink href="/lezartmunkalap">Lezárt munkalapok</CustomLink>
             <CustomLink href="/osszesmunkalap">Összes munkalap</CustomLink>
         </ul>
     </nav>
-    
   )
 }
 export default Navbar

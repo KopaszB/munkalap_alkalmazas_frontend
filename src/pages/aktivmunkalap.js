@@ -4,11 +4,13 @@ const ActiveSheet = () => {
   const [apiData, setApiData] = useState()
 
   useEffect(()=>{
-    fetch('http://localhost:8000/api/munkalapAktiv/')
+    fetch('http://localhost:8000/api/munkalapAktiv')
     .then(res => res.json())
     .then(data => setApiData(data))
   }, [])
 
+ 
+  
   return (
     <div id="activesheet">
         <h2>Aktív munkalapok</h2>
@@ -22,21 +24,17 @@ const ActiveSheet = () => {
     </div>
   )
 }
-export default ActiveSheet
+
 
 const ActiveSheetCard = (props) => {
 
-    /*const moveToViewsheet = (e) => {
-        localStorage.setItem('viewsheetId',props.id)
-        console.log(e.target.href="/viewsheet")
-    }*/
-
-  return (
+   
+  return  (
     <div className='card'>
         <table>
             <tbody>
                 <tr>
-                    <th>Munkalapszám:</th>
+                <th>Munkalapszám:</th>
                     <th>{props.munkalapszam}</th>
                 </tr>
                 <tr>
@@ -57,15 +55,16 @@ const ActiveSheetCard = (props) => {
                 </tr>
                 <tr>
                     <td>Márka:</td>
-                    <td>{props.gepjarmu_id.gyartmany}</td>
+                    <td>{props.megrendelo_id.gyartmany}</td>
                 </tr>
             </tbody>
         </table>
         <div className='button'>
             <a href={`/viewsheet/${props.id}`}>Megtekintés</a>
         </div>
-        
     </div>
   )
 }
 
+
+export default ActiveSheet

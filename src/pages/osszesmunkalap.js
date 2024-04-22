@@ -5,7 +5,7 @@ const AllSheet = () => {
   const [apiData, setApiData] = useState()
 
   useEffect(()=>{
-    fetch('http://localhost:8000/munkalap.json')
+    fetch('http://localhost:8000/api/munkalapOsszes')
     .then(res => res.json())
     .then(data => setApiData(data))
   }, [])
@@ -31,42 +31,39 @@ const AllSheetCard = (props) => {
         console.log("kattintottam")
     }
 
-  return (
-    <div className='card'>
-        <table>
-            <tbody>
-                <tr>
-                    <th>Munkalapszám:</th>
-                    <th>{props.munkalapszam}</th>
-                </tr>
-                <tr>
-                    <td>Név:</td>
-                    <td>{props.megrendelo_neve}</td>
-                </tr>
-                <tr>
-                    <td>Státusz:</td>
-                    <td className={props.munkalapstatusz === 'Aktív' ? "astatusz" : "lstatusz"}>{props.munkalapstatusz}</td>
-                </tr>
-                <tr>
-                    <td>Üzemanyagszint:</td>
-                    <td>{props.uzemanyagszint}</td>
-                </tr>
-                <tr>
-                    <td>Hiba:</td>
-                    <td>{props.hiba}</td>
-                </tr>
-                <tr>
-                    <td>Márka:</td>
-                    <td>{props.gepjarmu}</td>
-                </tr>
-            </tbody>
-        </table>
-        <div className='button'>
-            <a href={`/viewsheet/${props.id}`}>Megtekintés</a>
-        </div>
-    </div>
-  )
+    return (
+      <div className='card'>
+          <table>
+              <tbody>
+                  <tr>
+                  <th>Munkalapszám:</th>
+                      <th>{props.munkalapszam}</th>
+                  </tr>
+                  <tr>
+                      <td>Név:</td>
+                      <td>{props.megrendelo_id.nev}</td>
+                  </tr>
+                  <tr>
+                      <td>Státusz:</td>
+                      <td className='astatusz'>{props.munkalapstatus}</td>
+                  </tr>
+                  <tr>
+                      <td>Üzemanyagszint:</td>
+                      <td>{props.uzemenyagszint}</td>
+                  </tr>
+                  <tr>
+                      <td>Hiba:</td>
+                      <td>{props.hibatipus_id.hiba}</td>
+                  </tr>
+                  <tr>
+                      <td>Márka:</td>
+                      <td>{props.megrendelo_id.gyartmany}</td>
+                  </tr>
+              </tbody>
+          </table>
+          <div className='button'>
+              <a href={`/viewsheet/${props.id}`}>Megtekintés</a>
+          </div>
+      </div>
+    )
 }
-
-
-
