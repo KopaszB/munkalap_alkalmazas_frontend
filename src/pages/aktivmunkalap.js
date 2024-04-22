@@ -34,8 +34,8 @@ const ActiveSheetCard = (props) => {
         <table>
             <tbody>
                 <tr>
-                <th>Munkalapszám:</th>
-                    <th>{props.munkalapszam}</th>
+                    <th className='th1'>Munkalapszám:</th>
+                    <th className='th2'>{props.munkalapszam}</th>
                 </tr>
                 <tr>
                     <td>Név:</td>

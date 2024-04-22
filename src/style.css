@@ -136,6 +136,13 @@ nav li:hover {
     backdrop-filter: blur(2px);
     
 }
+.card .th1{
+    width: 50%;
+}
+.card .th2{
+    width: 50%;
+}
+
 .button {
     padding: 5px 0px;
     background-color: #FFB534;
