@@ -38,19 +38,28 @@ function MegrendeloDetail({ match }) {
   }
 
   return (
-    <div>
+    <div id="newsheet">
       <h2>Megrendelő részletei</h2>
-      <p><strong>Név:</strong> {megrendelo.nev}</p>
-      <p><strong>Cím:</strong> {megrendelo.cim}</p>
-      <p><strong>E-mail:</strong> {megrendelo.email}</p>
-      <p><strong>Telefon:</strong> {megrendelo.telefon}</p>
-      <p><strong>Rendszám:</strong> {megrendelo.rendszam}</p>
-      <p><strong>Gyártmány:</strong> {megrendelo.gyartmany}</p>
-      <p><strong>Típus:</strong> {megrendelo.tipus}</p>
-      <p><strong>Gyártási év:</strong> {megrendelo.gyartasiEv}</p>
-      <p><strong>Alvázszám:</strong> {megrendelo.alvazszam}</p>
-      <button onClick={handleDelete}>Törlés</button>
-      <Link to={`/megrendelo/${megrendelo.id}/edit`}>Szerkesztés</Link>
+      <div className="megrendelofelulet">
+        <p><strong>Név:</strong> {megrendelo.nev}</p>
+        <p><strong>Cím:</strong> {megrendelo.cim}</p>
+        <p><strong>E-mail:</strong> {megrendelo.email}</p>
+        <p><strong>Telefon:</strong> {megrendelo.telefon}</p>
+        <p><strong>Rendszám:</strong> {megrendelo.rendszam}</p>
+        <p><strong>Gyártmány:</strong> {megrendelo.gyartmany}</p>
+        <p><strong>Típus:</strong> {megrendelo.tipus}</p>
+        <p><strong>Gyártási év:</strong> {megrendelo.gyartasiEv}</p>
+        <p><strong>Alvázszám:</strong> {megrendelo.alvazszam}</p>
+
+        <div className='button'>
+          <button onClick={handleDelete}>Törlés</button>
+          &nbsp;
+          <Link to={`/megrendelo/${megrendelo.id}/edit`}>Szerkesztés</Link>
+        </div>
+
+
+      </div>
+      
     </div>
   );
 }

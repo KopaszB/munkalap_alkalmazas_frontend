@@ -248,10 +248,44 @@ nav li:hover {
     padding: 0;
     margin: 0;
     text-align: center;
-    color:#333;
+ 
 }
 
 #megrendelok .link{
+    max-width: 490px;
+    margin: 0 auto;
+    padding: 10px;
+    font-size: 1.2rem;
+    box-shadow: 0px 0px 10px rgba(35, 29, 29, 0.4);
+    border-radius: 0px;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    
+}
+#megrendelok .link>a{
+    color:#4a1515;
+    font-weight: bold;
+}
+.megrendelo a{
+    color:#333;
+    font-weight: bold;
+}
+.megrendelo li{
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 5px;
+    font-size: 1rem;
+    color: #333;
+    box-shadow: 0px 0px 10px rgba(35, 29, 29, 0.4);
+    border-radius: 0px;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    list-style: none;
+}
+
+/***Megrendelő felulet***/
+
+.megrendelofelulet{
     width: 490px;
     margin: 0 auto;
     padding: 10px;
@@ -261,21 +295,6 @@ nav li:hover {
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px);
 }
-.megrendelo li{
-    width: 500px;
-    margin: 0 auto;
-    padding: 5px;
-    font-size: 1.2rem;
-    box-shadow: 0px 0px 10px rgba(35, 29, 29, 0.4);
-    border-radius: 0px;
-    background-color: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    list-style: none;
-}
-
-/***Új megrendelő felulet***/
-
-
 
 
 

@@ -24,7 +24,7 @@ function MegrendeloList() {
     <div id='megrendelok'>
       <h2>Megrendelők</h2>
       <div className='link'>
-        <Link to="/megrendelo/new" style={{ textDecoration: 'none' }} >Új megrendelő létrehozása</Link>
+        <Link to="/megrendelo/new" style={{ textDecoration: 'none' }}>Új megrendelő létrehozása</Link>
       </div>
       
       <ul>
