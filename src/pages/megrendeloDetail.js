@@ -1,10 +1,10 @@
-// MegrendeloDetail.js
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function MegrendeloDetail({ match }) {
   const [megrendelo, setMegrendelo] = useState(null);
+  const history = useHistory();
 
   useEffect(() => {
     fetchMegrendelo();
@@ -27,7 +27,7 @@ function MegrendeloDetail({ match }) {
       await fetch(`http://localhost:8000/api/megrendelok/${megrendeloId}/`, {
         method: 'DELETE',
       });
-      // Redirect or do something after successful deletion
+      history.goBack();
     } catch (error) {
       console.error('Error deleting megrendelo:', error);
     }
@@ -40,26 +40,43 @@ function MegrendeloDetail({ match }) {
   return (
     <div id="newsheet">
       <h2>Megrendelő részletei</h2>
-      <div className="megrendelofelulet">
-        <p><strong>Név:</strong> {megrendelo.nev}</p>
-        <p><strong>Cím:</strong> {megrendelo.cim}</p>
-        <p><strong>E-mail:</strong> {megrendelo.email}</p>
-        <p><strong>Telefon:</strong> {megrendelo.telefon}</p>
-        <p><strong>Rendszám:</strong> {megrendelo.rendszam}</p>
-        <p><strong>Gyártmány:</strong> {megrendelo.gyartmany}</p>
-        <p><strong>Típus:</strong> {megrendelo.tipus}</p>
-        <p><strong>Gyártási év:</strong> {megrendelo.gyartasiEv}</p>
-        <p><strong>Alvázszám:</strong> {megrendelo.alvazszam}</p>
+      <form>
+        <div className="newsheetpart">
+          <label>Név: </label>
+          <input type="text" required value={megrendelo.nev} />
+          <label>Cím: </label>
+          <input type="text" required value={megrendelo.cim} />
+          <label>E-mail: </label>
+          <input type="text" required value={megrendelo.email} />
+          <label>Telefon: </label>
+          <input type="text" required value={megrendelo.telefon} />
+          <label>Rendszám: </label>
+          <input type="text" required value={megrendelo.rendszam} />
+          <label>Gyártmány: </label>
+          <input type="text" required value={megrendelo.gyartmany} />
+          <label>Típus: </label>
+          <input type="text" required value={megrendelo.tipus} />
+          <label>Gyártási év: </label>
+          <input type="text" required value={megrendelo.gyartasiEv} />
+          <label>Alvázszám: </label>
+          <input type="text" required value={megrendelo.alvazszam} />
 
-        <div className='button'>
-          <button onClick={handleDelete}>Törlés</button>
+          <div className='button'>
+            <button onClick={handleDelete} >Törlés</button>
+          </div>
           &nbsp;
-          <Link to={`/megrendelo/${megrendelo.id}/edit`}>Szerkesztés</Link>
+          <div className='button'>
+            <button onClick={() => history.goBack()}>Bezárás</button>
+          </div>
+
+
+          {/*&nbsp;
+          <div className='button'> 
+            <Link to={`/megrendelo/${megrendelo.id}/edit`}>Szerkesztés</Link>
+          </div>*/
+          }
         </div>
-
-
-      </div>
-      
+      </form>
     </div>
   );
 }

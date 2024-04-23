@@ -26,10 +26,9 @@ function MegrendeloList() {
       <div className='link'>
         <Link to="/megrendelo/new" style={{ textDecoration: 'none' }}>Új megrendelő létrehozása</Link>
       </div>
-      
       <ul>
-        {megrendelok.map(megrendelo => (
-          <div className='megrendelo'>
+        {megrendelok.map((megrendelo, i) => (
+          <div className='megrendelo' key={i}>
             <li key={megrendelo.id}>
               <Link to={`/megrendelo/${megrendelo.id}`} style={{ textDecoration: 'none'}}>{megrendelo.nev}</Link>
             </li>

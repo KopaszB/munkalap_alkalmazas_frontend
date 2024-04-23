@@ -3,17 +3,17 @@
 import React, { useState, useEffect } from 'react';
 
 const enumToReadable = {
-    enum_value_1: 'Aktív',
-    enum_value_2: 'Lezárt'
-    // Folytasd a többi értékkel...
-  };
-  const enumToReadable2 = {
-      enum_value_1: 'Negyed',
-      enum_value_2: 'Fél',
-      enum_value_3: 'Háromnegyed',
-      enum_value_4: 'Tele'
-      // Folytasd a többi értékkel...
-    };
+  enum_value_1: 'Aktív',
+  enum_value_2: 'Lezárt'
+  
+};
+const enumToReadable2 = {
+  enum_value_1: 'Negyed',
+  enum_value_2: 'Fél',
+  enum_value_3: 'Háromnegyed',
+  enum_value_4: 'Tele'
+  
+};
 
 
 
@@ -26,6 +26,8 @@ function MunkalapDetail({ match }) {
   }, []);
 
   const fetchMunkalap = async () => {
+
+
     try {
       const response = await fetch(`http://localhost:8000/api/munkalapok/${munkalapId}/`);
       const data = await response.json();

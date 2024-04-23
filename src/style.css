@@ -16,8 +16,8 @@ nav {
     background-color: #333;
     color: azure;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-    
 }
+
 
 nav ul{
     width: 100%;
@@ -248,7 +248,6 @@ nav li:hover {
     padding: 0;
     margin: 0;
     text-align: center;
- 
 }
 
 #megrendelok .link{
@@ -260,11 +259,13 @@ nav li:hover {
     border-radius: 0px;
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px);
+    background-color: #FFB534;
     
 }
 #megrendelok .link>a{
-    color:#4a1515;
+    color:#333;
     font-weight: bold;
+    
 }
 .megrendelo a{
     color:#333;
@@ -281,6 +282,7 @@ nav li:hover {
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px);
     list-style: none;
+    
 }
 
 /***Megrendelő felulet***/
