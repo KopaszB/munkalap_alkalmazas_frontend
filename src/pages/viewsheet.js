@@ -56,7 +56,7 @@ const ViewSheetCard = (props) => {
     const [elvegzettmunka, setElvegzettmunka] = useState(`${props.elvegzettmunka}`);
     const [felhasznaltanyag, setFelhasznaltanyag] = useState(`${props.felhasznaltanyag}`);
     const [ispending, setIspending] = useState(false);
-    const history = useHistory();
+    const history = useHistory()
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -84,7 +84,7 @@ const ViewSheetCard = (props) => {
 
         setIspending(true);
 
-        fetch('http://localhost:8000/api/munkalapok/', {
+        fetch('http://localhost:8000/db.json', {
             mode:"no-cors",
             method: 'POST',
             headers: {"Content-Type" : "application/json"},

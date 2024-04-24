@@ -1,5 +1,3 @@
-// MegrendeloList.js
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -30,7 +28,7 @@ function MegrendeloList() {
         {megrendelok.map((megrendelo, i) => (
           <div className='megrendelo' key={i}>
             <li key={megrendelo.id}>
-              <Link to={`/megrendelo/${megrendelo.id}`} style={{ textDecoration: 'none'}}>{megrendelo.nev}</Link>
+              <Link to={`/megrendelo/${megrendelo.id}`} style={{ textDecoration: 'none' }}>{megrendelo.nev}</Link>
             </li>
           </div>
         ))}

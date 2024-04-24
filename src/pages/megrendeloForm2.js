@@ -23,7 +23,7 @@ function MegrendeloForm({ megrendeloId }) {
 
   const fetchMegrendelo = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/megrendelok/${megrendeloId}/');
+      const response = await fetch(`http://localhost:8000/api/megrendelok/${megrendeloId}/`);
       const data = await response.json();
       setMegrendelo(data);
     } catch (error) {
@@ -43,7 +43,7 @@ function MegrendeloForm({ megrendeloId }) {
     e.preventDefault();
     try {
       if (megrendeloId) {
-        await fetch('http://localhost:8000/api/megrendelok/${megrendeloId}/', {
+        await fetch(`http://localhost:8000/api/megrendelok/${megrendeloId}/`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ function MegrendeloForm({ megrendeloId }) {
     <div id="newsheet">
       <form onSubmit={handleSubmit}>
         <div className="newsheetpart">
-          <h3>Megrendelő</h3>
+          <h3>Új megrendelő felvétele</h3>
           <label>Név:</label>
           <input type="text" name="nev" value={megrendelo.nev} onChange={handleChange} />
           <label>Cím:</label>
@@ -89,11 +89,16 @@ function MegrendeloForm({ megrendeloId }) {
           <input type="text" name="gyartasi_ev" value={megrendelo.gyartasiEv} onChange={handleChange} />
           <label>Alvázszám:</label>
           <input type="text" name="alvazszam" value={megrendelo.alvazszam} onChange={handleChange} />
+        <div>
+          <button type="submit" onClick={() => history.goBack()}>Mentés</button>
         </div>
-        <button type="submit" onClick={() => history.goBack()}>Mentés</button>
+        &nbsp;
+        <div>
+          <button onClick={() => history.goBack()}>Bezárás</button>
+        </div>
+        </div>
       </form>
     </div>
-
   );
 }
 

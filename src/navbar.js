@@ -2,7 +2,7 @@ const Navbar = () => {
   return (
     <nav>
         <ul className = "menubar">
-            <CustomLink href="/">AutoTech autószervíz</CustomLink>
+            <CustomLink href="/">AutoTech autószerviz</CustomLink>
             <CustomLink  href="/megrendelok">Megrendelők</CustomLink>
             <CustomLink  href="/ujmunkalap">Új munkalap</CustomLink>
             <CustomLink  href="/aktivmunkalap">Aktív munkalapok</CustomLink>

@@ -32,7 +32,7 @@ const AllSheetCard = (props) => {
     }
 
     return (
-        <div className='card'>
+      <div className='card'>
             <table>
                 <tbody>
                     <tr>
@@ -61,9 +61,9 @@ const AllSheetCard = (props) => {
                     </tr>
                 </tbody>
             </table>
-            <div className='button'>
-                <a href={`/viewsheet/${props.id}`}>Megtekintés</a>
-            </div>
-        </div>
+          <div className='button'>
+              <a href={`/munkalapok/${props.id}`}>Megtekintés</a>
+          </div>
+      </div>
     )
 }

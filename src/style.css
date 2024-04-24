@@ -299,10 +299,6 @@ nav li:hover {
 }
 
 
-
-
-
-
 @media(max-width:1000px) {
     .menubar .hideonMobile{
         display: none;

@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from "react";
-import Select from 'react-select';
-import { useHistory } from 'react-router-dom'
-
+import { useHistory } from 'react-router-dom';
 const enumToReadable = {
   enum_value_1: 'Aktív',
   enum_value_2: 'Lezárt'
   // Folytasd a többi értékkel...
-}
-
+};
 const enumToReadable2 = {
   enum_value_1: 'Negyed',
   enum_value_2: 'Fél',
   enum_value_3: 'Háromnegyed',
   enum_value_4: 'Tele'
   // Folytasd a többi értékkel...
-}
-
+};
 function generateMunkalapszam() {
   const now = new Date();
   const year = now.getFullYear().toString().slice(-2);
@@ -25,10 +21,10 @@ function generateMunkalapszam() {
   const minute = String(now.getMinutes()).padStart(2, '0');
   return `AT-${year}\\${month}-${day}-${hour}${minute}`;
 }
-
 function MunkalapForm({ munkalapId }) {
   const [munkalap, setMunkalap] = useState({
     megrendelo_id: '',
+
     munkalapstatus: 'enum_value_1',
     munkalapszam: generateMunkalapszam(),
     kmoraallas: '',
@@ -121,6 +117,7 @@ function MunkalapForm({ munkalapId }) {
           body: JSON.stringify(munkalap),
 
         });
+
       }
       console.log('POST request data:', munkalap); // Log data here
       // Redirect or do something after successful form submission
@@ -129,6 +126,8 @@ function MunkalapForm({ munkalapId }) {
     }
 
   };
+
+
   return (
     <div id="newsheet">
       <h2>Új munkalap felvétele</h2>
@@ -148,6 +147,7 @@ function MunkalapForm({ munkalapId }) {
               <option key={megrendelo.id} value={megrendelo.id}>{megrendelo.rendszam}{'____'}{megrendelo.nev} {'____'} {megrendelo.cim}  </option>
             ))}
           </select>
+
           <label>Km-óra állás:</label>
           <input type="number" name="kmoraallas" value={munkalap.kmoraallas} onChange={handleChange} />
           <label>Üzemanyagszint:</label>
@@ -172,8 +172,14 @@ function MunkalapForm({ munkalapId }) {
           <input type="text" name="elvegzettmunka" value={munkalap.elvegzettmunka} onChange={handleChange} />
           <label>Felhasznált anyagok:</label>
           <input type="text" name="felhasznaltanyag" value={munkalap.felhasznaltanyag} onChange={handleChange} />
+          <div>
+            <button type="submit" onClick={() => history.push('/aktivmunkalap') }>Mentés</button>
+          </div>
+          &nbsp;
+          <div>
+            <button onClick={() => history.push('/aktivmunkalap')}>Bezárás</button>
+          </div>
         </div>
-        <button type="submit" onClick={() => history.goBack()}>Mentés</button>
       </form>
     </div>
   )

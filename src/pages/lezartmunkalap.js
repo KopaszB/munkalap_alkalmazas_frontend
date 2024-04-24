@@ -3,26 +3,26 @@ import React, { useEffect, useState } from 'react'
 const InactiveSheet = () => {
     const [apiData, setApiData] = useState()
 
-    useEffect(()=>{
-      fetch('http://localhost:8000/api/munkalapInAktiv/')
-      .then(res => res.json())
-      .then(data => setApiData(data))
+    useEffect(() => {
+        fetch('http://localhost:8000/api/munkalapInAktiv/')
+            .then(res => res.json())
+            .then(data => setApiData(data))
     }, [])
-  
-   
 
-  return (
-    <div id="inactivesheet">
-        <h2>Lezárt munkalapok</h2>
-        <div className="cards">
-            {
-            apiData ?
-            apiData.map((data, idx) => <InactiveSheetCard key={idx} {...data} />) :
-            <div>Adatok betöltése...</div>
-            }
+
+
+    return (
+        <div id="inactivesheet">
+            <h2>Lezárt munkalapok</h2>
+            <div className="cards">
+                {
+                    apiData ?
+                        apiData.map((data, idx) => <InactiveSheetCard key={idx} {...data} />) :
+                        <div>Adatok betöltése...</div>
+                }
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 
@@ -58,7 +58,7 @@ const InactiveSheetCard = (props) => {
                 </tbody>
             </table>
             <div className='button'>
-                <a href={`/viewsheet/${props.id}`}>Megtekintés</a>
+                <a href={`/munkalapok/${props.id}`}>Megtekintés</a>
             </div>
         </div>
     )
