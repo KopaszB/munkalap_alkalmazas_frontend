@@ -4,17 +4,15 @@ import { useHistory } from 'react-router-dom';
 const enumToReadable = {
   enum_value_1: 'Aktív',
   enum_value_2: 'Lezárt'
-  // Folytasd a többi értékkel...
+  
 };
 const enumToReadable2 = {
   enum_value_1: 'Negyed',
   enum_value_2: 'Fél',
   enum_value_3: 'Háromnegyed',
   enum_value_4: 'Tele'
-  // Folytasd a többi értékkel...
+  
 };
-
-
 
 function MunkalapDetail({ match }) {
   const [munkalap, setMunkalap] = useState(null);
@@ -68,7 +66,8 @@ function MunkalapDetail({ match }) {
         body: JSON.stringify(editMunkalap),
       });
       console.log('POST request data:', editMunkalap); // Log data here
-      history.goBack()
+      history.push('/osszesmunkalap');
+      
     } catch (error) {
       console.error('Error updating megrendelo:', error);
     }
@@ -112,7 +111,8 @@ function MunkalapDetail({ match }) {
           <label>Felhasznált anyag:</label>
           <input type="text" name="felhasznaltanyag" value={munkalap.felhasznaltanyag} onChange={handleChange} />
           <div>
-            <button type="submit">Módosítás mentése</button>
+            <button type="submit" >Módosítás mentése</button>
+            
           </div>
           &nbsp;
           <div>

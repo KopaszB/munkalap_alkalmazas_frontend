@@ -120,7 +120,7 @@ function MunkalapForm({ munkalapId }) {
 
       }
       console.log('POST request data:', munkalap); // Log data here
-      // Redirect or do something after successful form submission
+      history.push('/megrendelok')
     } catch (error) {
       console.error('Error submitting munkalap form:', error);
     }
@@ -173,7 +173,7 @@ function MunkalapForm({ munkalapId }) {
           <label>Felhasznált anyagok:</label>
           <input type="text" name="felhasznaltanyag" value={munkalap.felhasznaltanyag} onChange={handleChange} />
           <div>
-            <button type="submit" onClick={() => history.push('/aktivmunkalap') }>Mentés</button>
+            <button type="submit">Mentés</button>
           </div>
           &nbsp;
           <div>

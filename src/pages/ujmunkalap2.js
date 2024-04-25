@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 
-const NewSheet = () => {
+const NewSheet2 = () => {
     const [nev, setNev] = useState('');
     const [cim, setCim] = useState('');
     const [email, setEmail] = useState('');
@@ -158,4 +158,4 @@ const NewSheet = () => {
 }
 
 
-export default NewSheet
+export default NewSheet2
